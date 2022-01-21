@@ -8,25 +8,22 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 
 const App = (props) => {
+
+
     return (
-        <BrowserRouter>
-            <div className='app-wrapper'>
-                <Header/>
-                <Navbar/>
-                <div className='app-wrapper-content'>
-                    <Routes>
-                        <Route path="/profile/" element={<Profile posts={props.posts}/>}/>
-                        <Route path="/dialogs/" element={<Dialogs dialogs={props.dialogs} messages={props.messages}/>}/>
+        <div className='app-wrapper'>
+            <Header/>
+            <Navbar/>
+            <div className='app-wrapper-content'>
+                <Routes>
+                    <Route path="/profile/" element={<Profile state={props.state.profilePage}/>}/>
+                    <Route path="/dialogs/" element={<Dialogs state={props.state.dialogsPage}/>}/>
 
-                    </Routes>
-                    {/*<Dialogs/>*/}
-                </div>
-                {/*<Profile />*/}
-
+                </Routes>
+                {/*<Dialogs/>*/}
             </div>
-        </BrowserRouter>
+            {/*<Profile />*/}
+        </div>
     );
 }
-
-
 export default App;
