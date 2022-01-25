@@ -1,3 +1,6 @@
+import {reRenderEntireTree} from "../render";
+
+
 let state={
     profilePage:{
         posts:[
@@ -7,6 +10,7 @@ let state={
             {id: 4, message: 'thanks', likesCount: 8},
 
         ],
+        newPostText: 'it-kamasutra.com'
 
     },
 dialogsPage:{
@@ -29,5 +33,22 @@ dialogsPage:{
     ],
 }
 
+}
+window.state=state;
+
+export let addPost=()=>{
+    let newPost={
+        id:5,
+        message:state.profilePage.newPostText,
+        likesCount: 0
+    }
+    state.profilePage.posts.push(newPost);
+    state.profilePage.newPostText='';
+    reRenderEntireTree(state);
+}
+
+export let updateNewPostText=(newText)=>{
+    state.profilePage.newPostText=newText;
+    reRenderEntireTree(state);
 }
 export default state;
