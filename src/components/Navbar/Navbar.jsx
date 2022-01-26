@@ -7,18 +7,18 @@ const Navbar = () => {
     return (
         <nav className={s.nav}>
             <div>
-                <NavLink to='/profile' className = { navData => navData.isActive ? s.active : s.item } >Profile</NavLink>
+                <NavLink to='/profile' className={navData => navData.isActive ? s.active : s.item}>Profile</NavLink>
             </div>
-            <div >
-                <NavLink to ='/dialogs' className = { navData => navData.isActive ? s.active : s.item } >Messages</NavLink>
+            <div>
+                <NavLink to='/dialogs' className={navData => navData.isActive ? s.active : s.item}>Messages</NavLink>
             </div>
-            <div >
+            <div>
                 <a>News</a>
             </div>
-            <div >
+            <div>
                 <a>Music</a>
             </div>
-            <div >
+            <div>
                 <a>Settings</a>
             </div>
         </nav>
