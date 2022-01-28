@@ -1,3 +1,6 @@
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+
 let store={
     _state: {
         profilePage: {
@@ -59,6 +62,10 @@ if(action.type==='ADD-POST'){
 }
     }
 }
+
+export const addPostActionCreator=()=>({type:ADD_POST})
+export const updateNewPostTextActionCreator=(text)=>({type: UPDATE_NEW_POST_TEXT, newText: text})
+
 window.state = store;
 
 export default store;
