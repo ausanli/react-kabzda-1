@@ -4,8 +4,6 @@ import Post from './Post/Post';
 import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../Redux/State";
 
 
-
-
 const MyPosts = (props) => {
     let postsElements = props.posts.map(p => <Post message={p.message} likeCount={p.likesCount}/>);
 
@@ -17,7 +15,7 @@ const MyPosts = (props) => {
     let onPostChange = () => {
         let text = newPostElement.current.value;
         //let action = {type: 'UPDATE-NEW-POST-TEXT', newText: text};
-        let action= updateNewPostTextActionCreator(text);
+        let action = updateNewPostTextActionCreator(text);
         props.dispatch(action);
     }
     return (

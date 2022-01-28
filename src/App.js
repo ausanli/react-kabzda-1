@@ -4,7 +4,7 @@ import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
 import Dialogs from "./components/Dialogs/Dialogs";
-import {Routes, Route} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 
 
 const App = (props) => {
@@ -20,7 +20,7 @@ const App = (props) => {
                                                               dispatch={props.dispatch}
 
                     />}/>
-                    <Route path="/dialogs/" element={<Dialogs state={props.state.dialogsPage}/>}/>
+                    <Route path="/dialogs/" element={<Dialogs store={props.store}/>}/>
 
                 </Routes>
                 {/*<Dialogs/>*/}
