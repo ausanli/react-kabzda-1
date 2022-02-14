@@ -34,7 +34,6 @@ const profileReducer = (state = initialState, action) => {
                 newPostText: action.newText
             };
         case SET_USER_PROFILE:
-            debugger;
             return {
                 ...state,
                 profile: action.profile
