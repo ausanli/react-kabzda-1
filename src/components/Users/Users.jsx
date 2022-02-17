@@ -13,6 +13,7 @@ let Users = (props) => {
         pages.push(i);
     }
     return <div>
+        {/*
         <div>
             {pages.map(p => {
                 return <span className={props.currentPage === p && styles.selectedPage} onClick={(event) => {
@@ -21,6 +22,7 @@ let Users = (props) => {
             })}
 
         </div>
+        */}
         {props.users.map(u => <div key={u.id}>
 <span>
     <div>
@@ -28,53 +30,57 @@ let Users = (props) => {
         <img src={u.photos.small !== null ? u.photos.small : userPhoto} className={styles.userPhoto}/>
             </NavLink>
     </div>
-    <div>
-        {u.followed
-            ? <button onClick={()=>{
+            <div>
+                {u.followed
+                    ? <button disabled={props.followingProgress && props.followingProgress.some(id => id === u.id)} onClick={() => {
 
-                axios.delete(`https://social-network.samuraijs.com/api/follow/${u.id}`, {
-                    withCredentials: true,
-                    headers:{
-                        "API-KEY":"929a14ef-e465-4b0c-b6db-11d4bb612e51"
-                    }
-                })
-                    .then(response => {
-                        if (response.data.resultCode == 0) {
-                            props.unfollow(u.id)
-                        }
-                    });
-
-
-                }}>UNFOLLOW</button>
-            : <button onClick={() => {
-
-                axios.post(`https://social-network.samuraijs.com/api/follow/${u.id}`,{}, {
-                    withCredentials: true,
-                    headers:{
-                        "API-KEY":"929a14ef-e465-4b0c-b6db-11d4bb612e51"
-                    }
-                })
-                    .then(response => {
-                        if (response.data.resultCode == 0) {
-                            props.follow(u.id);
-                        }
-                    });
+                        props.toggleIsFollowingProgress(true, u.id);
+                        axios.delete(`https://social-network.samuraijs.com/api/follow/${u.id}`, {
+                            withCredentials: true,
+                            headers: {
+                                "API-KEY": "929a14ef-e465-4b0c-b6db-11d4bb612e51"
+                            }
+                        })
+                            .then(response => {
+                                if (response.data.resultCode == 0) {
+                                    props.unfollow(u.id)
+                                }
+                                props.toggleIsFollowingProgress(false, u.id);
+                            });
 
 
-            }}>FOLLOW</button>}
+                    }}>UNFOLLOW</button>
+                    : <button disabled={props.followingProgress && props.followingProgress.some(id => id === u.id)} onClick={() => {
+                        props.toggleIsFollowingProgress(true, u.id);
+                        axios.post(`https://social-network.samuraijs.com/api/follow/${u.id}`, {}, {
+                            withCredentials: true,
+                            headers: {
+                                "API-KEY": "929a14ef-e465-4b0c-b6db-11d4bb612e51"
+                            }
+                        })
+                            .then(response => {
+                                if (response.data.resultCode == 0) {
+                                    props.follow(u.id);
+                                }
+                                props.toggleIsFollowingProgress(false, u.id);
+                            });
 
-    </div>
-</span>
+
+                }}>FOLLOW</button>}
+
+            </div>
+        </span>
+                    <span>
             <span>
-    <span>
-        <div>{u.name}</div>
-        <div>{u.status}</div>
-    </span>
-    <span>
-        <div>{'u.location.country'}</div>
-        <div>{'u.location.city'}</div>
-    </span>
-</span>
+                <div>{u.name}</div>
+                <div>{u.status}</div>
+            </span>
+            <span>
+                <div>{'u.location.country'}</div>
+                <div>{'u.location.city'}</div>
+            </span>
+        </span>
+
         </div>)}
     </div>
 
