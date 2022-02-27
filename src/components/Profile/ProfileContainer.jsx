@@ -12,10 +12,15 @@ import {compose} from "redux";
 class ProfileContainer extends React.Component {
 
     componentDidMount() {
-        let userId = 2;
+        /*let userId = this.props.authorizedUserId;
         if (this.props.params.profileId) {
             userId = this.props.params.profileId;
+        }*/
+        let userId = this.props.params.profileId;
+        if(!userId){
+            userId = this.props.authorizedUserId;
         }
+
         this.props.getUserProfile(userId);
 
         this.props.getStatus(userId);
@@ -25,7 +30,10 @@ class ProfileContainer extends React.Component {
 
 
         return (
-            <Profile {...this.props} profile={this.props.profile} status = {this.props.status} updateStatus ={this.props.updateStatus}/>
+            <Profile {...this.props}
+                     profile={this.props.profile}
+                     status = {this.props.status}
+                     updateStatus ={this.props.updateStatus}/>
 
         )
     }
@@ -42,6 +50,8 @@ const withRouter = WrappedComponent => props => {
 let mapStateToProps = (state) => ({
     profile: state.profilePage.profile,
     status: state.profilePage. status,
+    authorizedUserId: state. auth.userId,
+    isAuth: state.auth.isAuth
 });
 
 export default compose(connect(mapStateToProps, {getUserProfile, getStatus, updateStatus}),
