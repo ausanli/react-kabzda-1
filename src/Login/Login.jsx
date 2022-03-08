@@ -1,6 +1,6 @@
 import React from "react";
 import {Field, reduxForm} from "redux-form";
-import {Input} from "../components/common/FormsControls/FormsControls";
+import {createField, Input} from "../components/common/FormsControls/FormsControls";
 import {required} from "../utils/validators/validators";
 import {connect} from "react-redux";
 import {login} from "../Redux/auth-reducer";
@@ -9,18 +9,14 @@ import style from "./../components/common/FormsControls/FormsControls.module.css
 
 
 
-const LoginForm=(props)=>{
-    return (<form onSubmit={props.handleSubmit}>
-            <div>
-                <Field placeholder={"Email"} name={"email"} validate={[required]} component={Input}/>
-            </div>
-            <div>
-                <Field placeholder={"Password"} name={"password"} type={"password"} validate={[required]} component={Input}/>
-            </div>
-            <div>
-                <Field component={Input} name={"rememberMe"} type={"checkbox"}/> remember me
-            </div>
-        {props.error && <div className={style.formSummeryError}>{props.error}</div>}
+const LoginForm=({handleSubmit, error})=>{
+    return (<form onSubmit={handleSubmit}>
+
+                {createField("Email",[required],Input)}
+                {createField("Password","password",[required],Input, {type:"password"})}
+                {createField(null,"rememberMe",[],Input, {type:"checkbox"},"Remember Me")}
+
+        {error && <div className={style.formSummeryError}>{error}</div>}
             <div>
                 <button>Login</button>
             </div>

@@ -1,13 +1,13 @@
 import * as axios from "axios";
 
-const instance=axios.create({
-    withCredentials:true,
-    baseURL:`https://social-network.samuraijs.com/api/1.0/`,
-    headers: {"API-KEY":"929a14ef-e465-4b0c-b6db-11d4bb612e51"}
+const instance = axios.create({
+    withCredentials: true,
+    baseURL: `https://social-network.samuraijs.com/api/1.0/`,
+    headers: {"API-KEY": "929a14ef-e465-4b0c-b6db-11d4bb612e51"}
 });
 
 
-export const usersAPI= {
+export const usersAPI = {
     getUsers(currentPage = 1, pageSize = 10) {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`
         ).then(response => {
@@ -15,42 +15,41 @@ export const usersAPI= {
         });
     },
 
-    follow(userId){
+    follow(userId) {
         return instance.post(`follow/${userId}`)
     },
-    unfollow(userId){
+    unfollow(userId) {
         return instance.delete(`follow/${userId}`)
     },
-    getProfile(userId){
+    getProfile(userId) {
         console.warn('Obsolete method. Please, use profileAPI object')
-   return profileAPI.getProfile(userId);
-},
-
+        return profileAPI.getProfile(userId);
+    }
 }
 
-export const profileAPI= {
+export const profileAPI = {
 
-    getProfile(userId){
+    getProfile(userId) {
 
         return instance.get(`profile/` + userId);
     },
-    getStatus(userId){
-        return instance.get(`profile/status/`+ userId);
+    getStatus(userId) {
+        return instance.get(`profile/status/` + userId);
     },
-    updateStatus(status){
+    updateStatus(status) {
         return instance.put(`profile/status/`, {status: status});
     }
 
 }
 
-export const authAPI= {
-    me(){
-       return instance.get(`auth/me`)
+export const authAPI = {
+    me() {
+        return instance.get(`auth/me`)
     },
-    login(email, password, rememberMe, isAuth: false){
-        return instance.post(`auth/login`,{email, password, rememberMe});
+    login(email, password, rememberMe, isAuth: false) {
+        return instance.post(`auth/login`, {email, password, rememberMe});
     },
-    logout(){
+    logout() {
         return instance.delete(`auth/login`);
     },
 
