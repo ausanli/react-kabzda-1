@@ -4,8 +4,8 @@ import s from './ProfileInfo.module.css';
 import {reduxForm} from "redux-form";
 import style from "../../common/FormsControls/FormsControls.module.css";
 
-const ProfileDataForm =({handleSumbit, profile, error})=>{
-    return <form onSubmit={handleSumbit}>
+const ProfileDataForm =({handleSubmit, profile, error})=>{
+    return <form onSubmit={handleSubmit}>
         <div><button> save </button></div>
         {error && <div className={style.formSummeryError}>{error}</div>}
             <div>
